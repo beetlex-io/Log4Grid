@@ -1,0 +1,248 @@
+﻿@model Log4Grid.Management.Web.Models.IndexView
+<div id="lst-app">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            App Service <a class="label label-default" href="javascript:void(0)" style="float:right" onclick="CleanApp()">Clean</a></div>
+        <div class="panel-body">
+   
+            <ul class="nav-list">
+                @foreach (Log4Grid.Models.ApplicationData app in Model.Apps)
+                {
+                    <li ><a id="@app.ID" onclick="ChangeApp('@app.Name','')" class="tree-toggle nav-header app label label-default">@app.Name</a>
+                        <ul class="nav-list tree ">
+                            @foreach (Log4Grid.Models.ApplicationHost host in app.Hosts)
+                            {
+                                <li><a id="@host.ID" href="#" onclick="ChangeApp('@app.Name','@host.Name');" class="host label @Html.Raw(host.Enabled ? "label-success" : "label-danger")">@host.Name</a>
+                                <span id="@Html.Raw(host.ID+"-memory")" class="label label-primary" style="float: right">Mem:0MB</span>
+                                <span id="@Html.Raw(host.ID+"-cpu")"   class="label label-primary" style="float: right; margin-right: 10px">CPU:0%</span>
+                                </li>
+                       
+                            }
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+               
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="lst-log">
+    <div class="panel panel-default">
+        <div  class="panel-heading">
+           <span id="app-title" class="label label-default">  </span><span id="app-host" class="label label-default"></span></div>
+        <div class="panel-body" style="padding: 2px;">
+            <div class="container" style="padding: 2px; width: 700px;">
+                <nav class="navbar navbar-default" style="width: 700px;margin-bottom:2px;" role="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><span id="log-type" style="color:#ffffff;">All</span> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+           <li><a href="javascript:void(0)" onclick="$('#log-type').html('All')">All</a></li>
+            <li><a href="javascript:void(0)" onclick="$('#log-type').html('Debug')">Debug</a></li>
+            <li><a href="javascript:void(0)" onclick="$('#log-type').html('Info')">Info</a></li>
+            <li><a href="javascript:void(0)" onclick="$('#log-type').html('Warn')">Warn</a></li>
+         
+            <li><a href="javascript:void(0)" onclick="$('#log-type').html('Error')">Error</a></li>
+             <li><a href="javascript:void(0)" onclick="$('#log-type').html('Fatal')">Fatal</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="navbar-form navbar-left" >
+        <div class="form-group">
+         
+  <input type="text" id="from-date" style="width:120px;" class="form-control date" data-date-format="yyyy-mm-dd"/>
+
+  <input type="text" id="to-date" style="width:120px;" class="form-control date" data-date-format="yyyy-mm-dd"/>
+</div>
+        
+        <a href="javascript:void(0)" onclick="Search(0)" class="btn btn-default">Search</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="javascript:void(0)" onclick="Clean()">Clean</a></li>
+         <li><a href="javascript:void(0)" onclick="Backup()">Backup</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+            
+          <div id="datagrid-log" style="min-height:600px;">
+          
+          </div>  
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+<div style="clear: both;" />
+<script type='text/javascript'>
+    var selectApp="";
+    var selectHost="";
+
+    $(document).ready(function () {
+
+        $('.tree-toggle').click(function () {
+            $(this).parent().children('ul.tree').toggle(200);
+        });
+       // $('ul.tree').toggle(200);
+        $('.form-control.date').datepicker({});
+        Search(0);
+    });
+    var int = self.setInterval("GetAppStatus()", 5000)
+    function Backup() {
+        if (!selectApp) {
+            BootstrapDialog.show({
+                message: 'Please select service!',
+                buttons: [{
+                    label: 'Close',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }
+        else {
+            var msg = 'backup ' + selectApp;
+            if (selectHost)
+                msg += '->[' + selectHost + '] ';
+            msg += "'s " + "log data";
+            BootstrapDialog.show({
+                message: msg + "?",
+                buttons: [{
+                    label: 'YES',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                        $.post("/home/Backup", { app: selectApp, host: selectHost }, function (data) {
+                            if (data.indexOf('success') >= 0) {
+                                BootstrapDialog.alert(msg + " success");
+                                Search(0);
+                            }
+                            else {
+                                BootstrapDialog.alert(msg +" error " + data);
+                            }
+                        });
+                    }
+                }, {
+                    label: 'NO',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }
+    }
+    function CleanApp() {
+
+        var msg = 'clean app service data';
+        BootstrapDialog.show({
+            message: msg + '?',
+            buttons: [{
+                label: 'YES',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                    $.post("/home/CleanApp", { app: selectApp, host: selectHost }, function (data) {
+                        if (data.indexOf('success') >= 0) {
+                            BootstrapDialog.alert(msg + " success");
+                            window.location.reload();
+                        }
+                        else {
+                            BootstrapDialog.alert(msg + " error " + data);
+                        }
+                    });
+                }
+            }, {
+                label: 'NO',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
+            }]
+        });
+        
+    }
+
+    function Clean() {
+        if (!selectApp) {
+            BootstrapDialog.show({
+                message: 'Please select service!',
+                buttons: [{
+                    label: 'Close',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }
+        else {
+            var msg = 'clean ' + selectApp ;
+            if (selectHost)
+                msg += '->[' + selectHost + '] ';
+            msg += "'s "+ "log data";
+            BootstrapDialog.show({
+                message: msg + "?",
+                buttons: [{
+                    label: 'YES',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                        $.post("/home/Clean",{app:selectApp,host:selectHost}, function (data) {
+                            if (data.indexOf('success') >= 0) {
+                                BootstrapDialog.alert(msg + " success");
+                                Search(0);
+                            }
+                            else {
+                                BootstrapDialog.alert(msg + " error " + data);
+                            }
+                        });
+                    }
+                }, {
+                    label: 'NO',
+                    action: function (dialogItself) {
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }
+    }
+    function ChangeApp(app,host) {
+        $('#app-title').html(app)
+        $('#app-host').html(host);
+        selectApp = app;
+        selectHost = host;
+        Search(0);
+    }
+
+    function Search(index) {
+        var data = {
+            app: selectApp,
+            host:selectHost,
+            type: $('#log-type').html(),
+            from: $('#from-date').val(),
+            to: $('#to-date').val(),
+            pageIndex:index
+        };
+        $('#datagrid-log').load("/home/LogList", data);
+    }
+    function GetAppStatus() {
+        $.getJSON("/home/GetAppStatus", function (result) {
+            $.each(result, function (i, field) {
+                $.each(field.Hosts, function (i, host) {
+                    // alert(host.Enabled==true);
+                   
+                    if (host.Enabled) {
+                        $('#' + host.ID).removeClass('label-danger');
+                        $('#' + host.ID).addClass('label-success');
+                        $('#' + host.ID + "-cpu").html("CPU:" + host.CpuUsage);
+                        $('#' + host.ID + "-memory").html("Mem:" + host.MemoryUsage);
+                    }
+                    else {
+                        $('#' + host.ID).removeClass('label-success');
+                        $('#' + host.ID).addClass('label-danger');
+                    }
+                });
+            });
+        });
+    }               
+</script>
+

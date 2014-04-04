@@ -1,0 +1,98 @@
+﻿body
+{
+    margin: 0px;
+    padding: 90px 0px 0px 0px;
+    font-family: 微软雅黑;
+  
+    
+}
+a
+{
+    text-decoration: none;
+    font-weight: normal;
+}
+a:hover
+{
+    color: #666666;
+    text-decoration: none;
+}
+.title-icon
+{
+    background-position: 0px 0px;
+    background-size: 64px 64px;
+    background-image: url('../Images/log4grid-icon.png');
+    background-repeat: no-repeat;
+    margin-top: 2px;
+    padding-top: 16px;
+    padding-bottom:12px;
+    padding-left: 70px;
+    font-size: 22pt;
+    font-weight: bold;
+}
+#body_wrapper
+{
+    width:1000px;
+    margin:auto;
+    min-height:600px;
+}
+.host
+{
+    background-image: url('../Images/server.png');
+    background-repeat: no-repeat;
+    background-position: 0px 2px;
+    display: inline-block;
+    padding-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: 20px;
+    text-align: left;
+    margin-top: 4px;
+    width: 180px;
+    margin-bottom: 4px;
+}
+.app
+{
+    background-image: url('../Images/application.png');
+    background-repeat: no-repeat;
+    background-position: 0px 2px;
+    display: inline-block;
+    padding-left: 30px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: left;
+    margin-top: 4px;
+    width: 200px;
+    margin-bottom: 4px;
+    color: #FFFFFF;
+}
+#lst-app
+{
+   
+    width: 250px;
+    float: left;
+   
+    cursor: pointer;
+   
+}
+#lst-log
+{
+    width:720px;
+    float:right;
+}
+.panel-body ul
+{
+    list-style-type: none;
+    margin:0px;
+    padding-left:0px;
+}
+.panel-body li
+{
+    list-style-type: none;
+    margin:0px;
+    padding-left:0px;
+}
+#templatemo_copyright
+{
+    text-align:center;
+    padding:10px;
+}

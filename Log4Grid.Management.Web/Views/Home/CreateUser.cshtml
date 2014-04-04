@@ -1,0 +1,36 @@
+﻿@model System.String
+  <br />
+    <br />
+
+      <br />
+<div class="panel panel-default" style="margin: auto; width: 400px;">
+    <div class="panel-heading">
+        Create User</div>
+    <div class="panel-body">
+    <span class="label label-warning">@Model</span>
+    <form method="post" action="CreateUser?post=true"  enctype="application/x-www-form-urlencoded">
+     <br />
+        <div class="input-group">
+            <span class="input-group-addon" style="min-width:100px;">UserName</span>
+            <input type="text" style="min-width:100px;" class="form-control" name="name" placeholder="Username">
+        </div>
+        <br />
+        <div class="input-group">
+        <span class="input-group-addon" style="min-width:100px;">PassWord</span>
+            <input type="password" style="min-width:100px;" class="form-control" name="pwd"  placeholder="Password">
+            
+        </div>
+        <br />
+         <div class="input-group">
+        <span class="input-group-addon" style="min-width:100px;">Confirm</span>
+            <input type="password" style="min-width:100px;" class="form-control" name="rpwd"  placeholder="Confirm Password">
+            
+        </div>
+        <br />
+        <div class="input-group">
+            <a class="btn btn-default" style="margin-left:200px;float:left;margin-right:20px;" href="/Users">Users</a>
+            <button class="btn btn-default" style="float:right;" type="submit" >Create</button>
+        </div>
+        </form>
+    </div>
+</div>

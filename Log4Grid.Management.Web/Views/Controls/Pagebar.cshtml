@@ -1,0 +1,40 @@
+﻿@{
+    int pageindex = (int)PageData["pageindex"];
+    int pagecount = (int)PageData["pagecount"];
+ 
+}
+
+<ul class="pagination">
+    @if (pageindex > 0)
+    {
+        <li><a href="javascript:void(0)" onclick="Search(@Html.Raw(pageindex - 1))">Previous</a> </li>
+    }
+    @for (int i = pageindex-5;  i<pageindex; i++)
+    {
+        if (i >= 0)
+        {
+            
+        <li><a href="javascript:void(0)" onclick="Search(@Html.Raw(i))">@Html.Raw(i + 1)</a> </li>
+        }
+
+    }
+
+
+    <li ><a ><span class=" label label-default" style="padding-top:4px;padding-bottom:4px;margin-top:0px;display:inline-block;">@Html.Raw(pageindex + 1)</span> </a></li>
+
+    @for (int i = pageindex+1; (i < pageindex+6  && i<pagecount) ; i++)
+    {
+            
+        <li><a href="javascript:void(0)" onclick="Search(@Html.Raw(i))">@Html.Raw(i + 1)</a> </li>
+
+    }
+
+    @if (pagecount>1 && pageindex != pagecount - 1)
+    {
+                      
+        <li><a href="javascript:void(0)" onclick="Search(@Html.Raw(pageindex + 1))">Next</a> </li>
+            
+    }
+    <li class="disabled"><a>@Html.Raw(pageindex + 1) / @pagecount</a></li>
+</ul>
+

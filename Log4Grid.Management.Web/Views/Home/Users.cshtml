@@ -1,0 +1,76 @@
+﻿@model Log4Grid.Management.Web.Models.HomeUsers
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Users</div>
+    <div class="panel-body">
+        <nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/CreateUser">Create</a></li>
+      
+        </ul>
+  </div>
+</nav>
+        <div class="table-responsive" style="padding: 2px;">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 140px;">
+                            UserName
+                        </th>
+                        <th>
+                            Password
+                        </th>
+                        <th style="width: 120px;">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Log4Grid.Models.User item in Model.Users)
+                    {
+                        <tr >
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Password
+                            </td>
+                            <td>
+                                <a class="label label-danger" href="javascript:void(0)" onclick="DeleteUser('@item.Name')">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function DeleteUser(name) {
+        var msg = "delete " + name;
+        BootstrapDialog.show({
+            message: msg + "?",
+            buttons: [{
+                label: 'YES',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                    $.post("/home/DeleteUser", { name:name }, function (data) {
+                        if (data.indexOf('success') >= 0) {
+                            BootstrapDialog.alert(msg + " success");
+                            window.location.reload();
+                        }
+                        else {
+                            BootstrapDialog.alert(msg + " error " + data);
+                        }
+                    });
+                }
+            }, {
+                label: 'NO',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
+            }]
+        });
+    }
+</script>
