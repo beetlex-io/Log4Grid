@@ -47,15 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBModel.cs">
-      <Generator>Peanut</Generator>
-      <LastGenOutput>DBModel.Model.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="DBModel.Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="LogSearchHandler.cs" />
     <Compile Include="LogStoreHandler.cs" />
     <Compile Include="Management4Sqlite.cs" />
@@ -64,6 +55,10 @@
     <Compile Include="UserHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Log4Grid.DataAccess\Log4Grid.DataAccess.csproj">
+      <Project>{B17756D8-86C7-4F22-BFAF-6EB0E9D2913A}</Project>
+      <Name>Log4Grid.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Log4Grid.Interfaces\Log4Grid.Interfaces.csproj">
       <Project>{BB987F99-5A87-46A6-8C55-C0DF116A792B}</Project>
       <Name>Log4Grid.Interfaces</Name>

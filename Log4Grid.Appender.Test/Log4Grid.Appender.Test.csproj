@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C86CB871-068F-4A3F-A952-D5A5318EAD71}</ProjectGuid>
+    <ProjectGuid>{4588F814-317D-40A4-BB67-BF7245316026}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Log4Grid.Service.ConsoleApp</RootNamespace>
-    <AssemblyName>Log4Grid.Service.ConsoleApp</AssemblyName>
+    <RootNamespace>Log4Grid.Appender.Test</RootNamespace>
+    <AssemblyName>Log4Grid.Appender.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Bin\ServerApp\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,7 +29,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Bin\ServerApp\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\OthreLib\log4net.dll</HintPath>
+      <HintPath>..\..\OthreLib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,28 +52,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Log4Grid.MSSQL\Log4Grid.MSSQL.csproj">
-      <Project>{5C34589F-85C3-4C32-BBF5-EA93E4AF0829}</Project>
-      <Name>Log4Grid.MSSQL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Log4Grid.MySQL\Log4Grid.MySQL.csproj">
-      <Project>{1887FC18-2099-47F4-9D74-28C2E75435C7}</Project>
-      <Name>Log4Grid.MySQL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Log4Grid.Service\Log4Grid.Service.csproj">
-      <Project>{32006A34-6A2D-443B-AEEE-3CAF5492CEDD}</Project>
-      <Name>Log4Grid.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Log4Grid.Sqlite\Log4Grid.Sqlite.csproj">
-      <Project>{4EACB43E-513D-40AA-BD28-41AB1DBDABAD}</Project>
-      <Name>Log4Grid.Sqlite</Name>
+    <ProjectReference Include="..\Log4Grid.Appender\Log4Grid.Appender.csproj">
+      <Project>{D59A3882-FE9B-45D9-88E2-A7697876510B}</Project>
+      <Name>Log4Grid.Appender</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Log4Grid.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -90,7 +90,14 @@ namespace Log4Grid.Service
 
         public void Error(Beetle.Express.IServer server, Beetle.Express.ErrorEventArgs e)
         {
-            Utils.Log.InfoFormat("{0} error {1}", e.Channel.EndPoint,e.Error.Message);
+            if (e.Channel == null)
+            {
+                Utils.Log.ErrorFormat("log4grid server error {0}", e.Error.Message);
+            }
+            else
+            {
+                Utils.Log.ErrorFormat("{0} error {1}", e.Channel.EndPoint, e.Error.Message);
+            }
         }
 
         public void Opened(Beetle.Express.IServer server)

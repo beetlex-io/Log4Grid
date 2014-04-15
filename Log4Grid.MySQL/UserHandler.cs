@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Peanut;
 
-namespace Log4Grid.Sqlite
+namespace Log4Grid.MySQL
 {
-    public class User4Sqlite:Log4Grid.DataAccess.UserHandlerBase<SqliteDriver>
+    public class User4MySQL : Log4Grid.DataAccess.UserHandlerBase<MySqlDriver>
     {
       
     }

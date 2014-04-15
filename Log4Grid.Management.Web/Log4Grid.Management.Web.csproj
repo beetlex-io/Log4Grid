@@ -210,6 +210,10 @@
       <Project>{35604685-754A-49BE-B982-F37A39BF6965}</Project>
       <Name>Log4Grid.Config</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Log4Grid.DataAccess\Log4Grid.DataAccess.csproj">
+      <Project>{B17756D8-86C7-4F22-BFAF-6EB0E9D2913A}</Project>
+      <Name>Log4Grid.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Log4Grid.Interfaces\Log4Grid.Interfaces.csproj">
       <Project>{BB987F99-5A87-46A6-8C55-C0DF116A792B}</Project>
       <Name>Log4Grid.Interfaces</Name>
@@ -217,6 +221,14 @@
     <ProjectReference Include="..\Log4Grid.Models\Log4Grid.Models.csproj">
       <Project>{77AC7897-D0A5-45C4-8CC8-17B33D820740}</Project>
       <Name>Log4Grid.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Log4Grid.MSSQL\Log4Grid.MSSQL.csproj">
+      <Project>{5C34589F-85C3-4C32-BBF5-EA93E4AF0829}</Project>
+      <Name>Log4Grid.MSSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Log4Grid.MySQL\Log4Grid.MySQL.csproj">
+      <Project>{1887FC18-2099-47F4-9D74-28C2E75435C7}</Project>
+      <Name>Log4Grid.MySQL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Log4Grid.Sqlite\Log4Grid.Sqlite.csproj">
       <Project>{4EACB43E-513D-40AA-BD28-41AB1DBDABAD}</Project>

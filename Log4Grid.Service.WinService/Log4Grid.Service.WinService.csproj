@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\OthreLib\log4net.dll</HintPath>
+      <HintPath>..\..\..\OthreLib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -62,6 +62,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Log4Grid.MSSQL\Log4Grid.MSSQL.csproj">
+      <Project>{5C34589F-85C3-4C32-BBF5-EA93E4AF0829}</Project>
+      <Name>Log4Grid.MSSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Log4Grid.MySQL\Log4Grid.MySQL.csproj">
+      <Project>{1887FC18-2099-47F4-9D74-28C2E75435C7}</Project>
+      <Name>Log4Grid.MySQL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Log4Grid.Service\Log4Grid.Service.csproj">
       <Project>{32006A34-6A2D-443B-AEEE-3CAF5492CEDD}</Project>
       <Name>Log4Grid.Service</Name>
